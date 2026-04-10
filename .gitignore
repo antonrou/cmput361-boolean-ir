@@ -1,0 +1,10 @@
+# Python cache
+__pycache__/
+*.pyc
+*.log
+venv/
+# Generated index files
+data/*.json
+data/corpus_gutenberg_matrix.json
+data/corpus_gutenberg/
+
