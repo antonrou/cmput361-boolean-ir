@@ -129,7 +129,7 @@ This outputs per-query TP, FP, FN, TN, precision, recall, and F1, followed by ma
 
 ## Future Steps
 
-- **Linked list implementation** — The inverted index is currently implemented using Python dictionaries stored as JSON. A more efficient implementation would represent posting lists as sorted linked lists, enabling the merge-based intersection and union algorithms described in the course slides. This would also make it easier to add skip pointers.
+- **Linked list implementation** — The inverted index is currently implemented using Python dictionaries stored as JSON. A more efficient implementation would represent posting lists as sorted linked lists, enabling the merge-based intersection and union algorithms described in the course slides.
 - **Skip pointers** — Once posting lists are implemented as linked lists, skip pointers can be added to speed up the merge algorithm for `:and:` queries. Skip pointers allow jumping ahead in a posting list when the current doc ID is behind the other list's pointer, reducing the number of comparisons needed.
 - **Stemming** — Experiment with stemming (e.g. Porter Stemmer) as an alternative to lemmatization and compare the effect on index size and retrieval quality against the CISI benchmark.
 - **Date normalization** — Normalize different representations of the same date to a single token (e.g. `01/01/2026`, `January 1, 2026`, and `Jan 1 2026` should all map to the same term).
