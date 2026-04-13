@@ -3,6 +3,6 @@ __pycache__/
 *.pyc
 *.log
 venv/
-data/indexes/
+data/indexes/*.json
 tests/term-document_matrix/ground_truth/corpus_cisi_matrix.json
 
