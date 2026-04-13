@@ -1,6 +1,5 @@
 import json
 import argparse
-from convert_bln import extract_queries
 from query_engines.boolean import load_index, tokenize, normalize, shunting_yard, evaluate
 
 
@@ -47,11 +46,16 @@ def f1(p, r):
     return 2 * p * r / (p + r) if (p + r) > 0 else 0.0
 
 
-def main(index_path, bln_path, rel_path):
+def load_queries(queries_path):
+    with open(queries_path, 'r', encoding='utf-8') as f:
+        return json.load(f)
+
+
+def main(index_path, queries_path, rel_path):
     doc_map, index = load_index(index_path)
     all_docs = set(doc_map.keys())
 
-    queries = extract_queries(bln_path)
+    queries = load_queries(queries_path)
     relevant = load_relevance_judgments(rel_path, set(queries.keys()))
 
     total_tp = total_fp = total_fn = total_tn = 0
@@ -104,7 +108,7 @@ def main(index_path, bln_path, rel_path):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Evaluate boolean query engine on a benchmark.")
     parser.add_argument("index_path", help="Path to the inverted index JSON.")
-    parser.add_argument("bln_path", help="Path to the CISI.BLN boolean queries file.")
+    parser.add_argument("queries_path", help="Path to the boolean queries JSON file.")
     parser.add_argument("rel_path", help="Path to the relevance judgments file (CISI.REL).")
     args = parser.parse_args()
-    main(args.index_path, args.bln_path, args.rel_path)
+    main(args.index_path, args.queries_path, args.rel_path)

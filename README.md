@@ -12,7 +12,7 @@ This repository implements a full information retrieval pipeline across two assi
 - `preprocessor.py` — Tokenization and normalization logic (lemmatization, stopword removal).
 - `index_builder.py` — Index construction logic (inverted index and term-document matrix).
 - `query_engines/boolean.py` — Boolean query engine (tokenizer, normalizer, Shunting Yard algorithm, evaluator).
-- `convert_bln.py` — Converts CISI.BLN boolean query syntax into the engine's `:and:/:or:/:not:` syntax.
+- `data/cisi/cisi_boolean_queries.json` — The 35 CISI boolean queries manually translated into the engine's `:and:/:or:/:not:` infix syntax.
 - `evaluate.py` — Evaluation script that runs all CISI boolean queries and reports precision, recall, and F1.
 - `data/` — Input corpora, generated index files, and CISI benchmark files.
 - `tests/` — Tests and ground truth files.
@@ -103,7 +103,7 @@ pytest tests/test_compare.py \
 
 The evaluation uses the [CISI benchmark dataset](https://ir.dcs.gla.ac.uk/resources/test_collections/cisi/), which includes:
 
-- `CISI.BLN` — 35 boolean queries
+- `cisi_boolean_queries.json` — 35 boolean queries manually translated into the engine's infix syntax
 - `CISI.REL` — relevance judgments (ground truth)
 
 First, build the CISI inverted index:
@@ -122,8 +122,7 @@ This outputs per-query TP, FP, FN, TN, precision, recall, and F1, followed by ma
 
 #### How It Works
 
-1. `convert_bln.py` parses `CISI.BLN` (which uses `#and`, `#or`, `#not` prefix syntax) and converts each query into the engine's infix `:and:/:or:/:not:` syntax automatically.
-2. Each converted query is run through the boolean query engine against the CISI inverted index.
+1. Each converted query is run through the boolean query engine against the CISI inverted index.
 3. The returned set of document IDs is compared against the relevant documents in `CISI.REL`.
 4. Precision, recall, and F1 are computed per query, then aggregated as macro and micro averages.
 
