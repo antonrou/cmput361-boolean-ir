@@ -7,4 +7,5 @@ data/indexes/corpus_cisi_matrix.json
 # Large index files
 data/indexes/corpus_cisi_matrix.json
 data/indexes/corpus_gutenberg_matrix.json
+tests/term-document_matrix/ground_truth/corpus_cisi_matrix.json
 
