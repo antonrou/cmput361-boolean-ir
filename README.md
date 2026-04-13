@@ -5,7 +5,7 @@ This repository implements a preprocessing and indexing pipeline that reads a co
 ## Repository Layout
 
 - `main.py`: Entry point for running the pipeline.
-- `preprocesser.py`: Tokenization and normalization logic.
+- `preprocessor.py`: Tokenization and normalization logic.
 - `index_builder.py`: Index construction logic.
 - `data/`: Input corpora and generated index files.
 - `tests/`: Tests and ground truth files.
@@ -24,18 +24,18 @@ pip install -r requirements.txt
 Build an inverted index:
 
 ```bash
-python3 main.py --corpus ./data/corpus1 --index -i ./data/corpus1.json
+python3 main.py --corpus ./data/corpus1 -i ./data/indexes/corpus1.json
 ```
 
 Build a term-document incidence matrix:
 
 ```bash
-python3 main.py --corpus ./data/corpus1 --index -t ./data/corpus1_matrix.json
+python3 main.py --corpus ./data/corpus1 -t ./data/indexes/corpus1_matrix.json
 ```
 
 - `--corpus` — path to the folder containing `.txt` files to index
-- `--index -i` — build an inverted index and write to the given path
-- `--index -t` — build a term-document matrix and write to the given path
+- `-i` — build an inverted index and write to the given path
+- `-t` — build a term-document matrix and write to the given path
 
 ## Testing
 
@@ -47,8 +47,7 @@ Run a test comparing generated output against a ground truth file:
 pytest tests/test_compare.py \
   --corpus <corpus_path> \
   --output <output_path> \
-  --ground-truth <ground_truth_path> \
-  --index-type i|t
+  --ground-truth <ground_truth_path>
 ```
 
 Example — test inverted index for corpus_slides:
@@ -56,9 +55,8 @@ Example — test inverted index for corpus_slides:
 ```bash
 pytest tests/test_compare.py \
   --corpus ./data/corpus_slides \
-  --output ./data/corpus_slides.json \
-  --ground-truth ./tests/inverted_index/ground_truth/corpus_slides.json \
-  --index-type i
+  --output ./data/indexes/corpus_slides.json \
+  --ground-truth ./tests/inverted_index/ground_truth/corpus_slides.json
 ```
 
 Example — test term-document matrix for corpus_slides:
@@ -66,9 +64,8 @@ Example — test term-document matrix for corpus_slides:
 ```bash
 pytest tests/test_compare.py \
   --corpus ./data/corpus_slides \
-  --output ./data/corpus_slides_matrix.json \
-  --ground-truth ./tests/term-document_matrix/ground_truth/corpus_slides_matrix.json \
-  --index-type t
+  --output ./data/indexes/corpus_slides_matrix.json \
+  --ground-truth ./tests/term-document_matrix/ground_truth/corpus_slides_matrix.json
 ```
 
 ## Future Steps

@@ -1,6 +1,6 @@
 import os
 import json
-from preprocesser import preprocess
+from preprocessor import preprocess
 
 
 def write_index_to_json(index_path, doc_map, index):
