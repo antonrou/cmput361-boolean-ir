@@ -49,7 +49,7 @@
 #q18= #and(#or ('structures', 'structural', 'formulas', 'drawing', 
                  'compounds', 'chemical'),
            #or ('methods', 'automatically',
-		'extended', 'encoding', 'matching'));
+cmput361-as-preprocessing-and-Indexing/data/cisi		'extended', 'encoding', 'matching'));
 #q19= #and (#or ('matching', 'searching', 'coding'),
 	    #or ('methods', 'machine', 'techniques', 'systems') );
 #q20= #and ('testing', #or ('systems', 'automated', 'information') );
